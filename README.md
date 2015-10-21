@@ -33,7 +33,7 @@ The `data` setting can be used to pass a data object to a component. The values 
         }
     }).render('data-example');
 
-You can also provide data objects that have are deeply nested:
+You can also provide data objects that are deeply nested:
 
 **example.html**
 
