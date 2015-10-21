@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="css/barefoot.css">
+
+		<style>
+			.red { background:red;}</style>
+
+	</head>
+
+	<body>
+
+		<p data-example=""></p>
+
+		<!--#scripts-->
+
+		<script src="builds/barefoot-js.full.js"></script>
+
+<script>
+
+var example = new barefoot.component({
+	data: {
+		name: 'World'
+	},
+	content: '<p>Hello {{name}}</p>'
+}).render('data-example');
+
+example.prop.content = "<h1>Goodbye Cruel {{name}}</h1>";
+
+barefoot.render(example, 'data-example');
+
+</script>
+
+	<body>
+		
+</html>
