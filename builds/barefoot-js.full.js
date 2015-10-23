@@ -41,9 +41,9 @@ var component = function(prop) {
  * The render function renders a component inside a container. 
  */
 
-component.prototype.render = function(directive, cb) {
+component.prototype.render = function(da, cb) {
 
-	barefoot.render(this, directive, cb);
+	barefoot.render(this, da, cb);
 
 	return this;
 };
@@ -176,14 +176,32 @@ query.prototype.each = function(cb) {
 };
 
 /* 
-   #index
+   #eq
    ========================================================================== */
 
-query.prototype.index = function(index) {
+query.prototype.eq = function(index) {
 
-	//
-	// TODO
-	//
+	return new query(this.els[index]);
+
+};
+
+/* 
+   #first
+   ========================================================================== */
+
+query.prototype.first = function(selector) {
+
+	return new query(this.els[0]);
+
+};
+
+/* 
+   #last
+   ========================================================================== */
+
+query.prototype.last = function(selector) {
+
+	return new query(this.els[this.els.length - 1]);
 
 };
 
@@ -313,14 +331,14 @@ query.prototype.value = function(value) {
 
 		this.each(function(el) {
 
-			el.setAttribute("value", value);
+			el.value = value;
 
 		});
 
 		return this;
 	}
 
-	return this.els[0].getAttribute("value");
+	return this.els[0].value;
 
 };
 

@@ -20,9 +20,9 @@ var component = function(prop) {
  * The render function renders a component inside a container. 
  */
 
-component.prototype.render = function(directive, cb) {
+component.prototype.render = function(da, cb) {
 
-	barefoot.render(this, directive, cb);
+	barefoot.render(this, da, cb);
 
 	return this;
 };

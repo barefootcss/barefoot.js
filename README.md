@@ -134,32 +134,42 @@ Matches are wrapped inside a `query` class before passed to your main funciion.
     
 ### query class
 
-The `query` class contains the the following functions found in popular selector engines.
+The `query` class contains the popular functions found in popular selector engines like jQuery.
+
+__Traversing__
 
 * each()
-* index()
 * find()
+* first()
+* index()
+* last()
 * next()
 * parent()
-* html()
-* text()
-* attr()
-* removeAttr()
-* value()
-* style()
+
+__Manipulation__
+
 * addClass()
-* removeClass()
-* toggleClass()
-* append()
-* prepend()
-* before()
 * after()
+* append()
+* attr()
+* before()
+* css()
 * empty()
-* remove()
-* show()
 * hide()
+* html()
+* prepend()
+* remove()
+* removeAttr()
+* removeClass()
+* show()
+* text()
+* toggleClass()
+* val()
+
+__Events__
+
 * on()
-* un()
+* off()
 
 ### Querying Outside a Component
 

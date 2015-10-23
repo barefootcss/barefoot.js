@@ -46,14 +46,32 @@ query.prototype.each = function(cb) {
 };
 
 /* 
-   #index
+   #eq
    ========================================================================== */
 
-query.prototype.index = function(index) {
+query.prototype.eq = function(index) {
 
-	//
-	// TODO
-	//
+	return new query(this.els[index]);
+
+};
+
+/* 
+   #first
+   ========================================================================== */
+
+query.prototype.first = function(selector) {
+
+	return new query(this.els[0]);
+
+};
+
+/* 
+   #last
+   ========================================================================== */
+
+query.prototype.last = function(selector) {
+
+	return new query(this.els[this.els.length - 1]);
 
 };
 
@@ -174,10 +192,10 @@ query.prototype.removeAttr = function(name) {
 };
 
 /* 
-   #value
+   #val
    ========================================================================== */
 
-query.prototype.value = function(value) {
+query.prototype.val = function(value) {
 
 	if(value) {
 
