@@ -183,14 +183,14 @@ query.prototype.value = function(value) {
 
 		this.each(function(el) {
 
-			el.setAttribute("value", value);
+			el.value = value;
 
 		});
 
 		return this;
 	}
 
-	return this.els[0].getAttribute("value");
+	return this.els[0].value;
 
 };
 
