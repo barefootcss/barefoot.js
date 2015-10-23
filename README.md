@@ -1,176 +1,192 @@
-# Barefoot.js
+# BarefootJS
 
-Barefoot.js is a lightweight framework for building components. It traverses the DOM for custom data attributes and works its magic. The framework is 4KB because it does not extend the HTML5 vocabulary or "normalize" the page. In otherwords, your pages will be compliant and fast to load.
+BarefootJS is a lightweight framework for building components. It's __NOT__ required by Barefoot.css. BarefootJS is its own entity.
 
-## Usage Instructions
+## Installation
 
-Place all scripts after the closing body tag:
-
+Make sure to include the barefoot-js.min.js script before the closing <body> tag.
+    
     <html>
         <body>
-    
+            .
+            .
+            .
+            <script src="scripts/barefoot.min.js"></script>
+            <script src="script/directives.min.js"></script>
         </body>
-    
-        <script src="scripts/barefoot.min.js"></script>
-        <script src="script/directives.min.js"></script>
     </html>
 
-## Building a Component
+---
 
-### Data
+# How to Use
 
-The `data` setting can be used to pass a data object to a component. The values will replace any corresponding handle bar.
+### component class
 
-**example.html**
-
-    <p data-example> Hello {{name}} </p>
-
-**example.js**
+The `component` class defines a component. 
 
     new barefoot.component({
-        data: {
-            name: 'World'
-        }
-    }).render('data-example');
-
-You can also provide data objects that are deeply nested:
-
-**example.html**
-
-    <p data-example> Hello {{name.last}} </p>
-
-**example.js**
-
-    new barefoot.component({
-        data: {
-            name: {
-                last: 'World'
-            }
-        }
-    }).render('data-example');
-    
-### Content
-
-The content setting can be used to replace the innerHTML of the component with a string value you provide. 
-
-**example.html**
-
-    <p data-example></p>
-    
-**example.js**
-
-    new barefoot.component({
-        data: {
-            name: 'World'
-        },
-        content: '<p>Hello {{name}}</p>'
-    }).render('data-example');
-    
-### Include
-
-The `include` setting can be used to replace the innerHTML of the component with the contents of a file. 
-
-**example.html**
-
-    <p data-example></p>
-    
-**example.js**
-
-    new barefoot.component({
-        data: {
-            name: 'World'
-        },
-        include: 'sayhello.shtml'
-    }).render('data-example');    
-
-**sayhello.shtml**
-    
-    Hello {{name}}
-    
-### Element
-
-The `element` setting can be used to provide interactivity or DOM manipulation to your component. It wraps each match inside a [src/com/core.query.js](query class) that has jQuery-like methods.
-
-**example.html**
-
-    <p data-example></p>
-    
-**example.js**
-
-    new barefoot.component({
-        data: {
-            name: 'World'
-        },
-        element: function(el, data) {
-            el.html('<p>Hello {{name}}</p>');
-        }
-    }).render('data-example');    
-
-## Tricks & Tips
-
-### Passing Data
-
-The `prop` method contains all the properties of your object, even the data object.
-
-**example.js**
-
-    var remember = new barefoot.component({
-    	data: {
-    		name: 'Hello World'
-    	}
+        //
+        // Properties appear here
+        //
     });
+    
+### render function
+
+The `component.render` function traverses the document for a passed data attribute, and draws the component.
 
     new barefoot.component({
-    	element: function(el) {
-    		console.log(remember.prop.data.name);
-    	}
-    });
+        //
+        // Properties appear here
+        //
+    }).render('some-data-attribute');
 
-### Rerendering
+### Rendering Outside a Component
 
-The `barefoot.render` method can be used to rerender components after a property has changed.
-
-**example.html**
-
-    <p data-example></p>
-
-**example.js**
+The `barefoot.render` function allows you to render a component from another place in your script.
 
     var example = new barefoot.component({
-    	data: {
-    		name: 'World'
-    	},
-    	content: 'Hello {{name}}'
-    }).render('data-example');
+        //
+        // Properties appear here
+        //
+    });
     
-    example.prop.content = "Goodbye Cruel {{name}}";
+    barefoot.render(example, 'some-data-attribute');
+
+## Properties
+
+### data property
+
+The `data` property defines the data that will be used to replace any handlebar placeholders.
+
+    new barefoot.component({
+        data: {
+            name: 'world'
+        }
+    }).render('some-data-attribute');
     
-    barefoot.render(example, 'data-example');
+### content property
 
-## Built-in Directives
+The `content` property replaces the contents of the container element with a string value.
 
-### bare-cloak
+    new barefoot.component({
+        data: {
+            name: 'world'
+        },
+        content: '<p>Hello {{name}}</p>'
+    }).render('some-data-attribute');
+    
+### include property
 
-Hides content until the page loads. Requires the `barefoot-js.css` stylesheet.
+The `include` property replaces the contents of the container element with a external file.
 
-**example.html**
+    new barefoot.component({
+        data: {
+            name: 'world'
+        },
+        include: 'hello.shtml'
+    }).render('some-data-attribute');
+    
+### element property
 
-    <div data-bare-cloak>
+The `element` defines the main function that will be called when the component is rendered.
 
-    </div>
+    new barefoot.component({
+        data: {
+            name: 'world'
+        },
+        include: 'hello.shtml',
+            el.html('<p>Hello {{name}}</p>')
+        }
+    }).render('some-data-attribute');
 
-### bare-include
+### Accessing Properties Outside a Component
 
-**example.html**
+Properties can be changed or read outside of a property by using the `prop` variable.
 
-Includes the contents of a file.
+    var example = new barefoot.component({
+        data: {
+            name: 'world'
+        },
+        content: '<p>Hello {{name}}</p>'
+    }).render('some-data-attribute');
+    
+    console.log(example.prop.data.name);
 
-    <div data-bare-include="example.shtml">
+### Replacing Handlebars Outside a Component
 
-    </div>
+Handlebars values in a string can be 
 
-**example.shtml**
+    barefoot.template('<p>Hello {{name}}', {
+        name: 'World'
+    });
+        
+## DOM Manipulation
 
-    Hello World
+### element property
 
+Matches are wrapped inside a `query` class before passed to your main funciion.
 
+    new barefoot.component({
+        element: function(el) {
+            el.on('click', function(e) {
+                console.log('Hello World');
+            }
+        }
+    }).render('some-data-attribute');
+    
+### query class
+
+The `query` class contains the the following functions found in popular selector engines.
+
+* each()
+* index()
+* find()
+* next()
+* parent()
+* html()
+* text()
+* attr()
+* removeAttr()
+* value()
+* style()
+* addClass()
+* removeClass()
+* toggleClass()
+* append()
+* prepend()
+* before()
+* after()
+* empty()
+* remove()
+* show()
+* hide()
+* on()
+* un()
+
+### Querying Outside a Component
+
+You can quey outside of a component like so:
+
+    new barefoot.component({
+        element: function(el) 
+            el.on('click', function(e) {
+                new barefoot.query('body').style('background', 'red');
+            }
+        }
+    }).render('some-data-attribute');
+ 
+## Ajax
+
+This section still has to be written.
+
+---
+
+# Contribute
+
+This section still has to be written.
+
+---
+
+# License
+
+This section still has to be written.
