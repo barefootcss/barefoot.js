@@ -16,8 +16,6 @@ Make sure to include the barefoot-js.min.js script before the closing <body> tag
         </body>
     </html>
 
----
-
 # How to Use
 
 ### component class
@@ -179,13 +177,9 @@ You can quey outside of a component like so:
 
 This section still has to be written.
 
----
-
 # Contribute
 
 This section still has to be written.
-
----
 
 # License
 
