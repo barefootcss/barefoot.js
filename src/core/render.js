@@ -62,7 +62,7 @@ function render(component, da) {
 
       if (component.prop.element) {
 
-         component.prop.element(new query(el, component.prop.data));   
+         component.prop.element(new query(el), component.prop.data);   
            
       }
 
@@ -76,7 +76,7 @@ function render(component, da) {
 
       if (component.prop.data) {
          
-         el.innerHTML = template(el.innerHTML, component.prop.data);
+         el.innerHTML = template(el.innerHTML, component.prop);
 
       }
 

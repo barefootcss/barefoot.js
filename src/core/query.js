@@ -213,10 +213,10 @@ query.prototype.val = function(value) {
 };
 
 /* 
-   #style
+   #css
    ========================================================================== */
 
-query.prototype.style = function(name, value) {
+query.prototype.css = function(name, value) {
 
 	if(value) {
 

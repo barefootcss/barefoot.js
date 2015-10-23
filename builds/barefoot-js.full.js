@@ -322,10 +322,10 @@ query.prototype.removeAttr = function(name) {
 };
 
 /* 
-   #value
+   #val
    ========================================================================== */
 
-query.prototype.value = function(value) {
+query.prototype.val = function(value) {
 
 	if(value) {
 
@@ -343,10 +343,10 @@ query.prototype.value = function(value) {
 };
 
 /* 
-   #style
+   #css
    ========================================================================== */
 
-query.prototype.style = function(name, value) {
+query.prototype.css = function(name, value) {
 
 	if(value) {
 
@@ -669,7 +669,7 @@ function render(component, da) {
 
       if (component.prop.element) {
 
-         component.prop.element(new query(el, component.prop.data));   
+         component.prop.element(new query(el), component.prop.data);   
            
       }
 
@@ -683,7 +683,7 @@ function render(component, da) {
 
       if (component.prop.data) {
          
-         el.innerHTML = template(el.innerHTML, component.prop.data);
+         el.innerHTML = template(el.innerHTML, component.prop);
 
       }
 
